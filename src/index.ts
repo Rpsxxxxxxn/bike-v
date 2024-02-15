@@ -1,11 +1,10 @@
-import express from 'express';
+import express, { Request, Response } from 'express';
 import HistoryController from './controllers/HistoryController';
-import path from 'path';
 import MaintenanceController from './controllers/MaintenanceController';
 import SQLiteHelper from './utils/SQLiteHelper';
 
 const app = express();
-const port = 3000;
+const port = 8888;
 
 const historyController = HistoryController.create();
 const maintenanceController = MaintenanceController.create();
@@ -22,13 +21,14 @@ app.listen(port,'0.0.0.0', () => {
   db.createTable();
 });
 
-app.get('/', (req, res) => {
-  res.render('index', { title: 'Hello from Express and EJS with TypeScript!' });
+app.get('/', (req: Request, res: Response) => {
+  res.redirect('/maintenance');
+  // res.render('index', { title: 'Hello from Express and EJS with TypeScript!' });
 });
 
-app.get('/history', async (req, res) => historyController.get(req, res));
-app.post('/history', async (req, res) => historyController.update(req, res));
-app.delete('/history', async (req, res) => historyController.delete(req, res));
+app.get('/history', async (req: Request, res: Response) => historyController.get(req, res));
+app.post('/history', async (req: Request, res: Response) => historyController.update(req, res));
+app.delete('/history', async (req: Request, res: Response) => historyController.delete(req, res));
 
-app.get('/maintenance', (req, res) => maintenanceController.index(req, res));
-app.post('/maintenance/register', (req, res) => maintenanceController.register(req, res));
+app.get('/maintenance', (req: Request, res: Response) => maintenanceController.index(req, res));
+app.post('/maintenance/register', (req: Request, res: Response) => maintenanceController.register(req, res));

@@ -3,7 +3,7 @@ import fs from "fs";
 
 export default class SQLiteHelper {
   private db: sqlite3.Database;
-  private INIT_SQL: string = fs.readFileSync('init_db.sql', 'utf8');
+  // private INIT_SQL: string = fs.readFileSync('init_db.sql', 'utf8');
   private FILE_NAME: string = './bike-v.db';
 
   private constructor() {
