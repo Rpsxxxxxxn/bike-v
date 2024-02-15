@@ -1,0 +1,55 @@
+
+<form action="<%= page_id %>/register" method="POST">
+  <div class="card mx-auto my-5" style="max-width: 600px;">
+    <div class="card-header">
+      メンテナンス登録
+    </div>
+    <div class="px-3 py-3">
+      <div class="mb-3">
+        <label for="bikeName" class="form-label">バイク名 <span class="badge bg-danger">必須</span></label>
+        <select name="bikeName" id="bikeName" class="form-select">
+          <option value="ZX-10R">ZX-10R</option>
+          <option value="CBR1000RR-R">CBR1000RR-R</option>
+        </select>
+        <!-- <input type="text" class="form-control" name="bikeName" placeholder="ZX-10R"> -->
+      </div>
+      <div class="mb-3">
+        <label for="title" class="form-label">メンテナンス題名 <span class="badge bg-danger">必須</span></label>
+        <select name="title" id="title" class="form-select">
+          <option value="tire">タイヤ交換</option>
+          <option value="oil">オイル交換</option>
+          <option value="oil-filter">オイルフィルター交換</option>
+          <option value="gas">ガソリン活性剤</option>
+        </select>
+        <!-- <input type="text" class="form-control" name="title" placeholder="タイヤ交換／オイル交換"> -->
+      </div>
+      <div class="mb-3">
+        <label for="description" class="form-label">メンテナンス内容 <span class="badge bg-secondary">任意</span></label>
+        <textarea class="form-control" name="description" rows="3"></textarea>
+      </div>
+      <div class="mb-3">
+        <label for="odo" class="form-label">走行距離 <span class="badge bg-danger">必須</span></label>
+        <input type="number" class="form-control" name="odo" placeholder="10000km">
+      </div>
+      <div class="mb-3">
+        <label for="price" class="form-label">メンテナンス費用(円) <span class="badge bg-danger">必須</span></label>
+        <input type="number" class="form-control" name="price" placeholder="70000">
+      </div>
+      <div class="mb-3">
+        <label for="date" class="form-label">メンテナンス日 <span class="badge bg-danger">必須</span></label>
+        <input id="maintenance-date" type="date" class="form-control" name="date">
+      </div>
+      <input type="submit" class="btn btn-primary" value="登録">
+    </div>
+  </div>
+</form>
+
+<script>
+  const maintenanceDate = document.getElementById('maintenance-date');
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth();
+  const day = today.getDate();
+  const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+  maintenanceDate.value = formattedDate;
+</script>

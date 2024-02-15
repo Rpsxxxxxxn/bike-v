@@ -1,10 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><%= title %></title>
-</head>
-<body>
-    <h1><%= title %></h1>
-</body>
-</html>
+<div class="card mx-auto my-5" style="max-width: 400px;">
+  <table class="table">
+    <thead>
+    <tr>
+    <th scope="col">タイトル</th>
+    <th scope="col">走行距離</th>
+    <th scope="col">日付</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    <% dataList.forEach((data) => { %>
+      <div key={index}>
+        <tr>
+          <td><%= data.title %></td>
+          <td><%= data.odo %></td>
+          <td><%= data.date %></td>
+        </tr>
+      </div>
+    <% }) %>
+    </tbody>
+  </table>
+</div>
