@@ -13,16 +13,31 @@ export default class SQLiteHelper {
   public async createTable() {
     // await this.execute(this.INIT_SQL, []);
     this.db.serialize(() => {
+      // ユーザーテーブルの作成
+      this.db.run(`DROP TABLE IF EXISTS user;`);
+      this.db.run(`
+        CREATE TABLE IF NOT EXISTS user (
+          id INTEGER PRIMARY KEY,
+          email TEXT UNIQUE,
+          username TEXT,
+          password TEXT
+        );
+      `);
+      this.db.run(`INSERT INTO user (email, username, password) VALUES ('admin@example.com', 'Admin', '');`);
+
       this.db.run(`DROP TABLE IF EXISTS bike;`);
       this.db.run(`
         CREATE TABLE IF NOT EXISTS bike (
           id INTEGER PRIMARY KEY,
-          name TEXT UNIQUE
+          name TEXT,
+          type TEXT,
+          cc INTEGER,
+          purchase_date TEXT,
         );
       `);
   
       // bike テーブルにデータを挿入
-      this.db.run(`INSERT INTO bike (name) VALUES ('ZX-10R');`);
+      this.db.run(`INSERT INTO bike (name) VALUES ('Kawasaki Ninja ZX-10R');`);
   
       // maintenance テーブルの作成または削除
       this.db.run(`DROP TABLE IF EXISTS maintenance;`);

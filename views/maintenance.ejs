@@ -1,9 +1,9 @@
 
 <form action="<%= page_id %>/register" method="POST">
   <div class="card mx-auto my-5" style="max-width: 600px;">
-    <div class="card-header">
+    <!-- <div class="card-header">
       メンテナンス登録
-    </div>
+    </div> -->
     <div class="px-3 py-3">
       <div class="mb-3">
         <label for="bikeName" class="form-label">バイク名 <span class="badge bg-danger">必須</span></label>
@@ -30,18 +30,20 @@
         <textarea class="form-control" name="description" rows="3"></textarea>
       </div>
       <div class="mb-3">
-        <label for="odo" class="form-label">走行距離 <span class="badge bg-danger">必須</span></label>
-        <input type="number" class="form-control" name="odo" placeholder="10000km">
+        <label for="odo" class="form-label">走行距離(km) <span class="badge bg-danger">必須</span></label>
+        <input type="number" class="form-control" name="odo" placeholder="10000" required>
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">メンテナンス費用(円) <span class="badge bg-danger">必須</span></label>
-        <input type="number" class="form-control" name="price" placeholder="123456">
+        <input type="number" class="form-control" name="price" placeholder="123456" required>
       </div>
       <div class="mb-3">
         <label for="date" class="form-label">メンテナンス日 <span class="badge bg-danger">必須</span></label>
-        <input id="maintenance-date" type="date" class="form-control" name="date">
+        <input id="maintenance-date" type="date" class="form-control" name="date" required>
       </div>
-      <input type="submit" class="btn btn-primary" value="登録">
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button type="submit" class="btn btn-primary">登録</button>
+      </div>
     </div>
   </div>
 </form>

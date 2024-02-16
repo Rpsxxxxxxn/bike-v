@@ -1,4 +1,4 @@
-import History from "../forms/History";
+import History from "../HistoryForm";
 import IValidator from "./IValidator";
 
 export default class HistoryValidator implements IValidator {

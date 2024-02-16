@@ -1,23 +1,28 @@
-<div class="card mx-auto my-5" style="max-width: 400px;">
-  <table class="table">
-    <thead>
-    <tr>
-    <th scope="col">メンテナンス題名</th>
-    <th scope="col">走行距離</th>
-    <th scope="col">日付</th>
-    </tr>
-    </thead>
-    <tbody>
+<div class="mx-auto my-5" style="max-width: 400px;">
+  <% dataList.forEach((data) => { %>
+    <div class="card mb-3">
+      <div class="row g-0">
+        <!-- <div class="col-md-4">
+          <img src="https://ascii.jp/img/2023/05/01/3531840/l/f3cf566db48c40e1.png" class="img-fluid rounded-start" alt="...">
+        </div> -->
+        <div class="card-header">
+          <%= data.title %>
+        </div>
+        <div class="col-md-8">
+          <div class="card-body">
+            <!-- <h5 class="card-title"><%= data.title %></h5> -->
+            <p class="card-text">
+              <%= data.description %>
+            </p>
+            <p class="card-text"><small class="text-body-secondary"><%= data.date %></small></p>
+          </div>
 
-    <% dataList.forEach((data) => { %>
-      <div key={index}>
-        <tr>
-          <td><%= data.title %></td>
-          <td><%= data.odo %></td>
-          <td><%= data.date %></td>
-        </tr>
+        </div>
+        <div class="card-footer text-body-secondary">
+          <a href="#" class="btn btn-primary">編集</a>
+          <a href="#" class="btn btn-danger">削除</a>
+        </div>
       </div>
-    <% }) %>
-    </tbody>
-  </table>
+    </div>
+  <% }) %>
 </div>

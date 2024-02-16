@@ -1,5 +1,6 @@
-import Maintenance from "../../controllers/forms/Maintenance";
+import Maintenance from "../../controllers/forms/MaintenanceForm";
+import MaintenanceEntity from "../entities/MaintenanceEntity";
 
 export default interface IMaintenanceRepository {
-  register(maintenance: Maintenance): Promise<any>;
+  register(maintenance: Maintenance): Promise<MaintenanceEntity>;
 }

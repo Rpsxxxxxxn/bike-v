@@ -1,7 +1,10 @@
-import History from "../../controllers/forms/History";
+import History from "../../controllers/forms/HistoryForm";
+import HistoryEntity from "../entities/HistoryEntity";
 
 export default interface IHistoryRepository {
-  get(): Promise<any>;
-  update(form: History): Promise<any>;
-  delete(form: History): Promise<any>;
+  get(): Promise<HistoryEntity>;
+  getAll(): Promise<HistoryEntity[]>;
+  getByBikeId(bikeId: number): Promise<HistoryEntity[]>;
+  update(form: History): Promise<void>;
+  delete(form: History): Promise<void>;
 }

@@ -1,0 +1,54 @@
+<div>
+  <canvas id="myChartOdo"></canvas>
+  <canvas id="myChartPrice"></canvas>
+
+</div>
+
+<script>
+  const ctx = document.getElementById("myChartOdo");
+  const myLineChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ["7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月"],
+      datasets: [
+        {
+          label: '走行距離',
+          data: [3000, 4000, 5000, 8000, 10000, 13000, 15000, 17300],
+          borderColor: "rgba(32, 99, 232, 1)",
+          backgroundColor: "rgba(32, 99, 232, 0.5)",
+          fill: true,
+        },
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  })
+  const ctxPrice = document.getElementById("myChartPrice");
+  const myLineChartPrice = new Chart(ctxPrice, {
+    type: 'bar',
+    data: {
+      labels: ["7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月"],
+      datasets: [
+        {
+          label: 'メンテナンス費用',
+          data: [12000, 7000, 0, 14000, 8000, 7000, 70000, 7000],
+          borderColor: "rgba(255, 99, 132, 1)",
+          backgroundColor: "rgba(255, 99, 132, 0.5)",
+          fill: true,
+        },
+      ]
+    },
+    options: {
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  })
+</script>

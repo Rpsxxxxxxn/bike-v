@@ -1,17 +1,17 @@
 import { Request, Response } from "express";
 import IHistoryRepository from "../domains/repositories/IHistoryRepository";
 import HistoryRepositoryImpl from "../infrastructures/databases/HistoryRepositoryImpl";
-import History from "./forms/History";
-import HistoryValidator from "./validators/HistoryValidator";
+import HistoryForm from "./forms/HistoryForm";
+import HistoryValidator from "./forms/validators/HistoryValidator";
 
 export default class HistoryController {
   private historyRepository: IHistoryRepository = HistoryRepositoryImpl.create();
   private static PAGE_ID = 'history';
-  private static TITLE = '走行履歴';
+  private static TITLE = 'メンテナンス記録';
 
   private constructor() {}
 
-  public async get(req: Request, res: Response) {
+  public async get(req: any, res: Response) {
     const dataList = await this.historyRepository.get();
     res.render('layout', {
       layout_name: 'history',
@@ -22,7 +22,7 @@ export default class HistoryController {
   }
 
   public async update(req: Request, res: Response) {
-    const form: History = req.body;
+    const form: HistoryForm = req.body;
     if (HistoryValidator.create(form).isInvalid()) {
       res.redirect('/history');
     }

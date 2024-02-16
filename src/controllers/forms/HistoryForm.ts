@@ -1,4 +1,4 @@
-export default interface Maintenance {
+export default interface HistoryForm {
   bikeName: string;
   title: string;
   description: string;
