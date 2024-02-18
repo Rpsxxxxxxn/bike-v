@@ -1,10 +1,8 @@
-import Maintenance from "../../controllers/forms/MaintenanceForm";
+import MaintenanceForm from "../../controllers/forms/MaintenanceForm";
 import IMaintenanceRepository from "../../domains/repositories/IMaintenanceRepository";
 import SQLiteHelper from "../../utils/SQLiteHelper";
 
 export default class MaintenanceRepositoryImpl implements IMaintenanceRepository {
-  static SQL_BIKE_INSERT = 'INSERT INTO bike (name) VALUES (?)';
-  static SQL_BIKE_SELECT = 'SELECT id FROM bike WHERE name = ?';
   static SQL_MAINTENANCE_INSERT = 'INSERT INTO maintenance (bike_id, title, description, odo, price, date) VALUES (?, ?, ?, ?, ?, ?)';
   
   private constructor() {}
@@ -13,17 +11,20 @@ export default class MaintenanceRepositoryImpl implements IMaintenanceRepository
     return new MaintenanceRepositoryImpl();
   }
 
-  public async register(maintenance: Maintenance): Promise<any> {
+  public async register(userId: number, form: MaintenanceForm): Promise<any> {
     const database = SQLiteHelper.create();
-    const bikeInfo: any = await database.get(MaintenanceRepositoryImpl.SQL_BIKE_SELECT, [maintenance.bikeName]);
+    const bikeInfo: any = await database.get(`SELECT * FROM bike WHERE name = ?`, [form.bikeName]);
     if (bikeInfo) {
-      await database.execute(MaintenanceRepositoryImpl.SQL_MAINTENANCE_INSERT, [
+      await database.execute(`
+      INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date)
+      VALUES (?, ?, ?, ?, ?, ?, ?)`, [
+        userId,
         bikeInfo.id,
-        maintenance.title,
-        maintenance.description,
-        maintenance.odo,
-        maintenance.price,
-        maintenance.date
+        form.title,
+        form.description,
+        form.odo,
+        form.price,
+        form.date
       ]);
       await database.close();
     }

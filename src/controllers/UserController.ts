@@ -33,7 +33,14 @@ export default class UserController {
   public async postRegister(req: Request, res: Response) {
     const form: UserForm = req.body;
     if (UserValidator.create(form).isInvalid()) {
-      res.redirect('/user/register');
+      res.render('layout', {
+        layout_name: 'register',
+        page_id: UserController.PAGE_ID,
+        title: UserController.TITLE + '登録',
+        params: {
+          error: '入力内容に誤りがあります'
+        }
+      });
     }
     form.password = await bcrypt.hash(form.password, 10);
     await this.userRepository.insert(form);
@@ -45,7 +52,7 @@ export default class UserController {
    * @param req 
    * @param res 
    */
-  public async getLogin(req: any, res: Response) {
+  public async getLogin(req: Request, res: Response) {
     res.render('layout', {
       layout_name: 'login',
       page_id: UserController.PAGE_ID,
@@ -59,7 +66,7 @@ export default class UserController {
    * @param req 
    * @param res 
    */
-  public async postLogin(req: any, res: Response) {
+  public async postLogin(req: Request, res: Response) {
     const form: UserForm = req.body;
     const user = await this.userRepository.getByEmail(form.email);
     if (!user) {
@@ -69,7 +76,7 @@ export default class UserController {
       if (!result) {
         res.redirect('/user/login');
       }
-      req.session.user = user;
+      (req.session as any).user = user;
       res.redirect('/maintenance');
     }
   }
@@ -79,8 +86,8 @@ export default class UserController {
    * @param req 
    * @param res 
    */
-  public async logout(req: any, res: Response) {
-    req.session.user = null;
+  public async logout(req: Request, res: Response) {
+    (req.session as any).user = null;
     res.redirect('/user/login');
   }
 

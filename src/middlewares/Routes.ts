@@ -31,14 +31,16 @@ router.get('/history', async (req: Request, res: Response) => historyController.
 router.post('/history', async (req: Request, res: Response) => historyController.update(req, res));
 router.delete('/history', async (req: Request, res: Response) => historyController.delete(req, res));
 
-router.get('/maintenance', (req: Request, res: Response) => maintenanceController.index(req, res));
-router.post('/maintenance/register', (req: Request, res: Response) => maintenanceController.register(req, res));
+router.get('/maintenance', async (req: Request, res: Response) => maintenanceController.index(req, res));
+router.post('/maintenance/register', async (req: Request, res: Response) => maintenanceController.register(req, res));
 
-router.get('/bike', (req: Request, res: Response) => bikeController.index(req, res));
-router.get('/bike/register', (req: Request, res: Response) => bikeController.getRegister(req, res));
-router.post('/bike/register', (req: Request, res: Response) => bikeController.postRegister(req, res));
+router.get('/bike', async (req: Request, res: Response) => bikeController.index(req, res));
+router.get('/bike/register', async (req: Request, res: Response) => bikeController.getRegister(req, res));
+router.post('/bike/register', async (req: Request, res: Response) => bikeController.postRegister(req, res));
+router.get('/bike/have', async (req: Request, res: Response) => bikeController.getHaveBike(req, res));
 
-router.get('/graph', (req: Request, res: Response) => historyGraphController.index(req, res));
-router.get('/view3d', (req: Request, res: Response) => view3DController.index(req, res));
+router.get('/graph', async (req: Request, res: Response) => historyGraphController.index(req, res));
+router.get('/api/graph', async (req: Request, res: Response) => historyGraphController.getDataList(req, res));
+router.get('/view3d', async (req: Request, res: Response) => view3DController.index(req, res));
 
 export default router;

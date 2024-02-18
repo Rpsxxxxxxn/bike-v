@@ -1,54 +1,90 @@
-<div>
+<div class="mx-auto" style="max-width: 700px">
   <canvas id="myChartOdo"></canvas>
   <canvas id="myChartPrice"></canvas>
-
 </div>
 
 <script>
-  const ctx = document.getElementById("myChartOdo");
-  const myLineChart = new Chart(ctx, {
-    type: 'line',
-    data: {
-      labels: ["7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月"],
-      datasets: [
-        {
-          label: '走行距離',
-          data: [3000, 4000, 5000, 8000, 10000, 13000, 15000, 17300],
-          borderColor: "rgba(32, 99, 232, 1)",
-          backgroundColor: "rgba(32, 99, 232, 0.5)",
-          fill: true,
-        },
-      ]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+  function getApi(url) {
+    return new Promise((resolve, reject) => {
+      fetch(url)
+        .then((res) => res.json())
+        .then((data) => {
+          resolve(data);
+        });
+    });
+  }
+
+  fetch('/api/graph')
+        .then((res) => res.json())
+        .then((data) => {
+          myChartOdo(data);
+          myChartPrice(data);
+        });
+  // const dataList = await getApi('/api/graph');
+
+  function myChartOdo(dataList) {
+    let labels = [];
+    let odoData = [];
+    dataList.forEach((data) => {
+      labels.push(data.date);
+      odoData.push(data.odo);
+    });
+    const ctx = document.getElementById("myChartOdo");
+    const myLineChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '走行距離',
+            data: odoData,
+            borderColor: "rgba(32, 99, 232, 1)",
+            backgroundColor: "rgba(32, 99, 232, 0.5)",
+            fill: true,
+            tension: 0
+          },
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  })
-  const ctxPrice = document.getElementById("myChartPrice");
-  const myLineChartPrice = new Chart(ctxPrice, {
-    type: 'bar',
-    data: {
-      labels: ["7月", "8月", "9月", "10月", "11月", "12月", "1月", "2月"],
-      datasets: [
-        {
-          label: 'メンテナンス費用',
-          data: [12000, 7000, 0, 14000, 8000, 7000, 70000, 7000],
-          borderColor: "rgba(255, 99, 132, 1)",
-          backgroundColor: "rgba(255, 99, 132, 0.5)",
-          fill: true,
-        },
-      ]
-    },
-    options: {
-      scales: {
-        y: {
-          beginAtZero: true
+    })
+  }
+
+  function myChartPrice(dataList) {
+    let labels = [];
+    let priceData = [];
+    dataList.forEach((data) => {
+      labels.push(data.date);
+      priceData.push(data.price);
+    });
+    const ctxPrice = document.getElementById("myChartPrice");
+    const myLineChartPrice = new Chart(ctxPrice, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: 'メンテナンス費用',
+            data: priceData,
+            borderColor: "rgba(255, 99, 132, 1)",
+            backgroundColor: "rgba(255, 99, 132, 0.5)",
+            fill: true,
+            tension: 0.1,
+          },
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
         }
       }
-    }
-  })
+    })
+  }
 </script>

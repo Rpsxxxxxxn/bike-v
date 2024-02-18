@@ -1,8 +1,8 @@
 export default interface BikeForm {
   name: string;
-  type: string;
-  color: string;
-  brand: string;
-  modelNo: string;
-  purchaseDate: Date;
+  company: string;
+  oilChange: string;
+  oilFilter: string;
+  model: string;
+  cc: string;
 }

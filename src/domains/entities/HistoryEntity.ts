@@ -1,11 +1,11 @@
 export default class HistoryEntity {
-  private _id: string;
-  private _bikeName: string;
-  private _title: string;
-  private _description: string;
-  private _odo: number;
-  private _price: number;
-  private _date: Date;
+  private id: string;
+  private bikeName: string;
+  private title: string;
+  private description: string;
+  private odo: number;
+  private price: number;
+  private date: Date;
 
   private constructor(
     id: string,
@@ -16,13 +16,13 @@ export default class HistoryEntity {
     price: number,
     date: Date
   ) {
-    this._id = id;
-    this._bikeName = bikeName;
-    this._title = title;
-    this._description = description;
-    this._odo = odo;
-    this._price = price;
-    this._date = date;
+    this.id = id;
+    this.bikeName = bikeName;
+    this.title = title;
+    this.description = description;
+    this.odo = odo;
+    this.price = price;
+    this.date = date;
   }
 
   static create(
@@ -37,31 +37,31 @@ export default class HistoryEntity {
     return new HistoryEntity(id, bikeName, title, description, odo, price, date);
   }
 
-  get id(): string {
-    return this._id;
+  public getId() {
+    return this.id;
   }
 
-  get bikeName(): string {
-    return this._bikeName;
+  public getBikeName() {
+    return this.bikeName;
   }
 
-  get title(): string {
-    return this._title;
+  public getTitle() {
+    return this.title;
   }
 
-  get description(): string {
-    return this._description;
+  public getDescription() {
+    return this.description;
   }
 
-  get odo(): number {
-    return this._odo;
+  public getOdo() {
+    return this.odo;
   }
 
-  get price(): number {
-    return this._price;
+  public getPrice() {
+    return this.price;
   }
 
-  get date(): Date {
-    return this._date;
+  public getDate() {
+    return this.date;
   }
 }

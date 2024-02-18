@@ -1,22 +1,31 @@
 import { NextFunction, Request, Response } from "express";
+import UserRepositoryImpl from "../infrastructures/databases/UserRepositoryImpl";
 
 export default class Authenticate {
+  static userRepository = UserRepositoryImpl.create();
+
   public static async authenticateUser(req: Request, res: Response, next: NextFunction) {
     try {
-      // const token = req.header("Authorization")?.replace("Bearer ", "");
-      // if (!token) {
-      //   throw new Error("Please authenticate");
+      // 現在のURLがログイン画面の場合はパス
+      const reqUrl = req.url;
+      switch (reqUrl) {
+        case '/user/login':
+        case '/user/register':
+          next();
+          return;
+      }
+      // /api/* は認証不要
+      // if (reqUrl.startsWith('/api/')) {
+      //   next();
+      //   return;
       // }
-      // const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      // const user = await User.findOne({ _id: (decoded as any)._id, "tokens.token": token });
-      // if (!user) {
-      //   throw new Error("Please authenticate");
-      // }
-      // req.user = user;
-      // req.token = token;
-      next();
+      if ((req.session as any).user) {
+        next();
+        return;
+      }
+      res.redirect('/user/login');
     } catch (e) {
-      res.status(401).send({ error: "Please authenticate" });
+      res.status(401).send({ error: "権限がありません" });
     }
   }
 }

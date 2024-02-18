@@ -11,13 +11,14 @@ export default class HistoryController {
 
   private constructor() {}
 
-  public async get(req: any, res: Response) {
-    const dataList = await this.historyRepository.get();
+  public async get(req: Request, res: Response) {
     res.render('layout', {
       layout_name: 'history',
       page_id: HistoryController.PAGE_ID,
       title: HistoryController.TITLE,
-      params: { dataList }
+      params: {
+        dataList: await this.historyRepository.get()
+      }
     });
   }
 

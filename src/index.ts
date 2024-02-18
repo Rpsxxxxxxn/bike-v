@@ -2,6 +2,7 @@ import express from 'express';
 import SQLiteHelper from './utils/SQLiteHelper';
 import session from 'express-session';
 import router from './middlewares/Routes';
+import cors from 'cors';
 
 const app = express();
 const port = 8888;
@@ -15,11 +16,17 @@ app.use(session({
   saveUninitialized: true,
 }));
 
+const allowedOrigins = ['http://localhost:3000'];
+const options: cors.CorsOptions = {
+  origin: allowedOrigins
+};
+app.use(cors(options));
+
 app.use(router);
 app.set('view engine', 'ejs');
 
-app.listen(port,'0.0.0.0', () => {
+app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
-  // const db = SQLiteHelper.create();
-  // db.createTable();
+  const db = SQLiteHelper.create();
+  db.createTable();
 });

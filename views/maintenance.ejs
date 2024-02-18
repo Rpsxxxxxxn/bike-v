@@ -1,28 +1,26 @@
 
 <form action="<%= page_id %>/register" method="POST">
-  <div class="card mx-auto my-5" style="max-width: 600px;">
+  <div class="card mx-auto my-5" style="max-width: 700px;">
     <!-- <div class="card-header">
       メンテナンス登録
     </div> -->
     <div class="px-3 py-3">
       <div class="mb-3">
-        <label for="bikeName" class="form-label">バイク名 <span class="badge bg-danger">必須</span></label>
+        <label for="bikeName" class="form-label">車体名 <span class="badge bg-danger">必須</span></label>
         <select name="bikeName" id="bikeName" class="form-select">
-          <option value="ZX-10R">Kawasaki Ninja ZX-10R</option>
-          <option value="CBR1000RR-R">Honda CBR1000RR-R</option>
-          <option value="R1M">YAMAHA R1M</option>
-          <option value="GSXR-1000R">SUZUKI GSXR-1000R</option>
-          <option value="S1000RR">BMW S1000RR</option>
-          <option value="V4R">DUCATI Panigale V4 R</option>
+          <% bikeList.forEach((bike) => { %>
+            <option value="<%= bike.name %>"><%= bike.company %> <%= bike.name %></option>
+          <% }) %>
         </select>
       </div>
       <div class="mb-3">
         <label for="title" class="form-label">メンテナンス題名 <span class="badge bg-danger">必須</span></label>
         <select name="title" id="title" class="form-select">
-          <option value="タイヤ交換">タイヤ交換</option>
           <option value="オイル交換">オイル交換</option>
           <option value="オイルフィルター交換">オイルフィルター交換</option>
-          <option value="ガソリン活性剤">ガソリン活性剤</option>
+          <option value="タイヤ交換">タイヤ交換</option>
+          <option value="カスタムパーツ">カスタムパーツ</option>
+          <option value="ガソリン添加剤">ガソリン添加剤</option>
         </select>
       </div>
       <div class="mb-3">
@@ -31,11 +29,11 @@
       </div>
       <div class="mb-3">
         <label for="odo" class="form-label">走行距離(km) <span class="badge bg-danger">必須</span></label>
-        <input type="number" class="form-control" name="odo" placeholder="10000" required>
+        <input type="number" class="form-control" name="odo" placeholder="0" required>
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">メンテナンス費用(円) <span class="badge bg-danger">必須</span></label>
-        <input type="number" class="form-control" name="price" placeholder="123456" required>
+        <input type="number" class="form-control" name="price" placeholder="0" required>
       </div>
       <div class="mb-3">
         <label for="date" class="form-label">メンテナンス日 <span class="badge bg-danger">必須</span></label>
