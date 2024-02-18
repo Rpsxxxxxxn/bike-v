@@ -2,14 +2,14 @@ import { Request, Response } from "express";
 import MaintenanceForm from "./forms/MaintenanceForm";
 import IMaintenanceRepository from "../domains/repositories/IMaintenanceRepository";
 import MaintenanceRepositoryImpl from "../infrastructures/databases/MaintenanceRepositoryImpl";
-import IBikeRepository from "../domains/repositories/IBikeRepository";
-import BikeRepositoryImpl from "../infrastructures/databases/BikeRepositoryImpl";
+import IHaveBikeRepository from "../domains/repositories/IHaveBikeRepository";
+import HaveBikeRepositoryImpl from "../infrastructures/databases/HaveBikeRepositoryImpl";
 
 export default class MaintenanceController {
   private static PAGE_ID = 'maintenance';
   private static TITLE = 'メンテナンス登録';
   private maintenanceRepository: IMaintenanceRepository = MaintenanceRepositoryImpl.create();
-  private bikeRepository: IBikeRepository = BikeRepositoryImpl.create();
+  private haveRepository: IHaveBikeRepository = HaveBikeRepositoryImpl.create();
   private constructor() {}
 
   public async register(req: Request, res: Response) {
@@ -24,7 +24,7 @@ export default class MaintenanceController {
       page_id: MaintenanceController.PAGE_ID,
       title: MaintenanceController.TITLE,
       params: {
-        bikeList: await this.bikeRepository.getAll()
+        bikeList: await this.haveRepository.getAllByUserId((req.session as any).user.id)
       }
     });
   }

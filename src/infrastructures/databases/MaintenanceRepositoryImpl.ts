@@ -11,6 +11,16 @@ export default class MaintenanceRepositoryImpl implements IMaintenanceRepository
     return new MaintenanceRepositoryImpl();
   }
 
+  public async get(id: number): Promise<any> {
+    const database = SQLiteHelper.create();
+    const maintenance: any = await database.get(`
+    SELECT *
+    FROM maintenance
+    WHERE id = ?`, [id]);
+    await database.close();
+    return maintenance;
+  }
+
   public async register(userId: number, form: MaintenanceForm): Promise<any> {
     const database = SQLiteHelper.create();
     const bikeInfo: any = await database.get(`SELECT * FROM bike WHERE name = ?`, [form.bikeName]);
@@ -29,5 +39,21 @@ export default class MaintenanceRepositoryImpl implements IMaintenanceRepository
       await database.close();
     }
     return;
+  }
+
+  public async update(id: number, form: MaintenanceForm): Promise<void> {
+    const database = SQLiteHelper.create();
+    await database.execute(`
+    UPDATE maintenance
+    SET title = ?, description = ?, odo = ?, price = ?, date = ?
+    WHERE id = ?`, [
+      form.title,
+      form.description,
+      form.odo,
+      form.price,
+      form.date,
+      id
+    ]);
+    await database.close();
   }
 }

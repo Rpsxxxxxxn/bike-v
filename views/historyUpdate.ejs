@@ -4,15 +4,15 @@
     <div class="px-3 py-3">
       <div class="mb-3">
         <label for="bikeName" class="form-label">車体名 <span class="badge bg-danger">必須</span></label>
-        <select name="bikeName" id="bikeName" class="form-select">
-          <% bikeList.forEach((bike) => { %>
-            <option value="<%= bike.name %>"><%= bike.company %> <%= bike.name %></option>
+        <select name="bikeName" id="bikeName" class="form-select" value="<%= bikeData.bike_name %>">
+          <% bikeList.forEach((value) => { %>
+            <option value="<%= value.name %>"><%= value.company %> <%= value.name %></option>
           <% }) %>
         </select>
       </div>
       <div class="mb-3">
         <label for="title" class="form-label">メンテナンス題名 <span class="badge bg-danger">必須</span></label>
-        <select name="title" id="title" class="form-select">
+        <select name="title" id="title" class="form-select" value="<%= bikeData.title %>">
           <option value="オイル交換">オイル交換</option>
           <option value="オイルフィルター交換">オイルフィルター交換</option>
           <option value="タイヤ交換">タイヤ交換</option>
@@ -22,19 +22,19 @@
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">メンテナンス内容 <span class="badge bg-secondary">任意</span></label>
-        <textarea class="form-control" name="description" rows="3"></textarea>
+        <textarea class="form-control" name="description" rows="3" value="<%= bikeData.description %>"></textarea>
       </div>
       <div class="mb-3">
         <label for="odo" class="form-label">走行距離(km) <span class="badge bg-danger">必須</span></label>
-        <input type="number" class="form-control" name="odo" placeholder="0" required>
+        <input type="number" class="form-control" name="odo" placeholder="0" value="<%= bikeData.odo %>" required>
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">メンテナンス費用(円) <span class="badge bg-danger">必須</span></label>
-        <input type="number" class="form-control" name="price" placeholder="0" required>
+        <input type="number" class="form-control" name="price" placeholder="0" value="<%= bikeData.price %>" required>
       </div>
       <div class="mb-3">
         <label for="date" class="form-label">メンテナンス日 <span class="badge bg-danger">必須</span></label>
-        <input id="maintenance-date" type="date" class="form-control" name="date" required>
+        <input id="maintenance-date" type="date" class="form-control" name="date" value="<%= bikeData.date %>" required>
       </div>
       <div class="d-grid gap-2 col-6 mx-auto">
         <button type="submit" class="btn btn-primary">登録</button>

@@ -1,24 +1,24 @@
-<div class="mx-auto my-5" style="max-width: 700px">
-  <% haveBikeList.forEach((data) => { %>
-    <div class="card mb-3 px-3">
-      <!-- <div class="row g-0"> -->
-        <!-- <div class="col-md-4">
-          <img src="https://young-machine.com/main/wp-content/uploads/2023/03/23ZX1002L_GN1DLS3CG_A.jpg" class="img-fluid rounded-start" alt="...">
-        </div> -->
-        <!-- <div class="col-md-8"> -->
-          <div class="card-body">
-            <h5 class="card-title"><%= data.company %> <%= data.name %></h5>
+<a href="/bike/list">所有車体の追加</a>
+<div class="mx-auto my-5 px-3" style="max-width: 700px">
+  <% haveBikeList.forEach((data)=> { %>
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">
+          <%= data.company %>
+            <%= data.name %>
+        </h5>
 
-            <ul class="list-group list-group-flush">
-              <li class="list-group-item">オイル交換時 <%= data.oil_change %>L</li>
-              <li class="list-group-item">フィルタ交換時 <%= data.oil_filter %>L</li>
-              <li class="list-group-item">モデル <%= data.model %></li>
-              <li class="list-group-item">排気量 <%= data.cc %>cc</li>
-            </ul>
-            <!-- <p class="card-text"><small class="text-body-secondary">購入日 2023/07/16</small></p> -->
-          </div>
-        <!-- </div> -->
-      <!-- </div> -->
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">オイル交換時 <%= data.oil_change %>L</li>
+          <li class="list-group-item">フィルタ交換時 <%= data.oil_filter %>L</li>
+          <li class="list-group-item">モデル <%= data.model %>
+          </li>
+          <li class="list-group-item">排気量 <%= data.cc %>cc</li>
+        </ul>
+      </div>
+      <div class="card-footer">
+        <a href="/bike/have/delete/<%= data.id %>" class="btn btn-danger">所有している車体の削除</a>
+      </div>
     </div>
   <% }) %>
 </div>

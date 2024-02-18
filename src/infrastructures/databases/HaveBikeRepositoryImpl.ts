@@ -1,3 +1,4 @@
+import BikeForm from "../../controllers/forms/BikeForm";
 import HaveBikeEntity from "../../domains/entities/HaveBikeEntity";
 import IHaveBikeRepository from "../../domains/repositories/IHaveBikeRepository";
 import SQLiteHelper from "../../utils/SQLiteHelper";
@@ -11,8 +12,17 @@ export default class HaveBikeRepositoryImpl implements IHaveBikeRepository {
   public async getAll(): Promise<HaveBikeEntity[]> {
     const db = SQLiteHelper.create();
     const dataList: any = await db.all('SELECT * FROM have_bike', []);
-
-    return []
+    dataList.map((data: any) => {
+      return HaveBikeEntity.create(
+        data.company,
+        data.name,
+        data.model,
+        data.oil_change,
+        data.oil_filter,
+        data.cc
+      );
+    });
+    return dataList;
   }
 
   public async getAllByUserId(id: number): Promise<HaveBikeEntity[]> {
@@ -46,11 +56,13 @@ export default class HaveBikeRepositoryImpl implements IHaveBikeRepository {
     throw new Error("Method not implemented.");
   }
   
-  public async create(entity: HaveBikeEntity): Promise<HaveBikeEntity> {
-    throw new Error("Method not implemented.");
+  public async create(userId: number, bikeId: number, purchaseDate: Date): Promise<void> {
+    const db = SQLiteHelper.create();
+    await db.execute('INSERT INTO have_bike (user_id, bike_id, purchase_date) VALUES (?, ?, ?)', [userId, bikeId, purchaseDate]);
+    db.close();
   }
 
-  public async update(entity: HaveBikeEntity): Promise<void> {
+  public async update(form: BikeForm): Promise<void> {
     throw new Error("Method not implemented.");
   }
   

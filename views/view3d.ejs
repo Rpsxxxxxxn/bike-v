@@ -1,3 +1,48 @@
 <div>
-  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.140.0/three.js"
+    integrity="sha512-Gy8szbSSGKRiKN1K7gLQElSShxmqH7w+89pg3aMWIUw7umNzO2jquyMyJp3eFKS6aRhvo/xc60r0/Np7bMcQ3w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <canvas id="myCanvas"></canvas>
 </div>
+
+<style>
+  canvas {
+    max-width: 700px;
+    height: 100%;
+  }
+</style>
+
+<script>
+  const renderer = new THREE.WebGLRenderer({
+    canvas: document.querySelector("#myCanvas")
+  });
+  const width = 300;
+  const height = 540;
+  // （略）
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(`window`.devicePixelRatio);
+  const camera = new THREE.PerspectiveCamera(
+    45,
+    width / height,
+    1,
+    10000
+  );
+
+  // カメラの初期座標を設定（X座標:0, Y座標:0, Z座標:0）
+  camera.position.set(0, 0, 1000);
+
+  const geometry = new THREE.BoxGeometry(500, 500, 500);
+  const material = new THREE.MeshStandardMaterial({
+    color: 0x0000ff
+  });
+  const scene = new THREE.Scene();
+  const box = new THREE.Mesh(geometry, material);
+  // シーンに追加
+  scene.add(box);
+  const light = new THREE.DirectionalLight(0xffffff);
+  light.intensity = 2; // 光の強さを倍に
+  light.position.set(1, 1, 1); // ライトの方向
+  // シーンに追加
+  scene.add(light);
+  renderer.render(scene, camera);
+</script>
