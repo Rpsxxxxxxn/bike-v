@@ -31,8 +31,4 @@ export default class HistoryGraphRepositoryImpl implements IHistoryGraphReposito
     });
     return result;
   }
-
-  // public async getByBikeId(bikeId: number): Promise<HistoryEntity> {
-  //   return HistoryEntity.create('', '', '', '', 0, 0, new Date());
-  // }
 }

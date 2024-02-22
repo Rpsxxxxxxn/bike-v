@@ -29,6 +29,8 @@ export default class UserRepositoryImpl implements IUserRepository {
   }
 
   public async delete(id: number): Promise<void> {
+    const db = SQLiteHelper.create();
+    await db.execute('DELETE FROM user WHERE id = ?', [id]);
   }
 
   public async get(form: UserForm): Promise<UserEntity | null> {

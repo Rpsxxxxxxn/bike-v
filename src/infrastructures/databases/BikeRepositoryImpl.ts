@@ -42,5 +42,10 @@ export default class BikeRepositoryImpl implements IBikeRepository {
   }
 
   public async delete(form: BikeForm): Promise<void> {
+    const db = SQLiteHelper.create();
+    const data: any = await db.get('SELECT * FROM bike WHERE company = ? AND name = ?', [form.company, form.name]);
+    if (data) {
+      await db.execute('DELETE FROM bike WHERE id = ?', [data.id]);
+    }
   }
 }

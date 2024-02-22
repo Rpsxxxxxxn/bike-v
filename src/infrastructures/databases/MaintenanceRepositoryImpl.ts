@@ -38,7 +38,6 @@ export default class MaintenanceRepositoryImpl implements IMaintenanceRepository
       ]);
       await database.close();
     }
-    return;
   }
 
   public async update(id: number, form: MaintenanceForm): Promise<void> {
