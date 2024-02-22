@@ -1,28 +1,29 @@
-import History from "../HistoryForm";
+import HistoryForm from "../HistoryForm";
 import IValidator from "./IValidator";
+import SingleValidator from "./SingleValidator";
 
 export default class HistoryValidator implements IValidator {
-  private form: History;
+  private form: HistoryForm;
 
-  private constructor(form: History) {
+  private constructor(form: HistoryForm) {
     this.form = form;
   }
 
+  static create(form: HistoryForm) {
+    return new HistoryValidator(form);
+  }
+
   public isValid() {
-    if (this.form.title === '' || this.form.title === null) {
-      return false;
-    }
-    if (this.form.odo < 0) {
-      return false;
-    }
-    return true;
+    return !SingleValidator.isNullOrEmpty(this.form.bikeName)
+    && !SingleValidator.isNullOrEmpty(this.form.title)
+    && !SingleValidator.isNullOrEmpty(this.form.description)
+    && !SingleValidator.isNullOrZero(this.form.odo)
+    && SingleValidator.isNumber(this.form.price)
+    && !SingleValidator.isNullOrZero(this.form.price)
+    && !SingleValidator.isNullOrUndefined(this.form.date)
   }
 
   public isInvalid() {
     return !this.isValid();
-  }
-
-  static create(form: History) {
-    return new HistoryValidator(form);
   }
 }

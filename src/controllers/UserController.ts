@@ -72,6 +72,9 @@ export default class UserController {
    */
   public async postLogin(req: Request, res: Response) {
     const form: UserForm = req.body;
+    if (UserValidator.create(form).isInvalid()) {
+      res.redirect('/user/login');
+    }
     const user = await this.userRepository.getByEmail(form.email);
     if (!user) {
       res.redirect('/user/login');

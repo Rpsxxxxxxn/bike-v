@@ -1,4 +1,3 @@
-import BikeForm from "../../controllers/forms/BikeForm";
 import HaveBikeEntity from "../entities/HaveBikeEntity";
 
 export default interface IHaveBikeRepository {

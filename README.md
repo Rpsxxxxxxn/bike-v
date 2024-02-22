@@ -2,17 +2,22 @@
 まずは、自分のバイクを管理するためのツール
 
 ## 開発環境
-メインプラットフォーム: NODE JS  
+メインPF: NODE JS  
 FW: EXPRESS  
 テストFW: JEST  
 DB: SQLITE3  
 
-## スタート
+## ローカル環境の実行
 ```
 npm run dev
 ```
 
-## 本番環境
+## UTの実行
+```
+npm run test
+```
+
+## ビルド
 ```
 npm run build
 ```

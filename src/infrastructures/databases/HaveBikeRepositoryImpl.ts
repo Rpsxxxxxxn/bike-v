@@ -1,4 +1,3 @@
-import BikeForm from "../../controllers/forms/BikeForm";
 import HaveBikeEntity from "../../domains/entities/HaveBikeEntity";
 import IHaveBikeRepository from "../../domains/repositories/IHaveBikeRepository";
 import SQLiteHelper from "../../utils/SQLiteHelper";
@@ -9,6 +8,7 @@ export default class HaveBikeRepositoryImpl implements IHaveBikeRepository {
   static create() {
     return new HaveBikeRepositoryImpl();
   }
+  
   public async getAll(): Promise<HaveBikeEntity[]> {
     const db = SQLiteHelper.create();
     const dataList: any = await db.all('SELECT * FROM have_bike', []);

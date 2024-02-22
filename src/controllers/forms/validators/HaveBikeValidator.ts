@@ -1,20 +1,22 @@
 import HaveBikeForm from "../HaveBikeForm";
 import IValidator from "./IValidator";
+import SingleValidator from "./SingleValidator";
 
 export default class HaveBikeValidator implements IValidator {
   private form: HaveBikeForm;
   private constructor(form: HaveBikeForm) {
     this.form = form;
   }
+
   static create(form: HaveBikeForm) {
     return new HaveBikeValidator(form);
   }
 
-  isValid(): boolean {
-    return this.form.date !== null;
+  public isValid(): boolean {
+    return SingleValidator.isDate(this.form.date);
   }
-  isInvalid(): boolean {
+
+  public isInvalid(): boolean {
     return !this.isValid();
   }
-  
 }

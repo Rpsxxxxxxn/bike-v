@@ -1,11 +1,11 @@
 export default class BikeEntity {
-    id: string;
-    company: string;
-    name: string;
-    model: string;
-    oilChange: string;
-    oilFilter: string;
-    cc: string;
+    private id: string;
+    private company: string;
+    private name: string;
+    private model: string;
+    private oilChange: string;
+    private oilFilter: string;
+    private cc: string;
 
     private constructor(
         id: string,
