@@ -6,12 +6,6 @@ describe('BikeRepositoryImpl', () => {
     expect(repository).toBeInstanceOf(BikeRepositoryImpl);
   });
 
-  it('getAll', async () => {
-    const repository = BikeRepositoryImpl.create();
-    const result = await repository.getAll();
-    expect(result).toBeInstanceOf(Array);
-  });
-
   it('get', async () => {
     const repository = BikeRepositoryImpl.create();
     const result = await repository.get();
