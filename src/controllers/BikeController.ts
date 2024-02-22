@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import IBikeRepository from "../domains/repositories/IBikeRepository";
 import BikeRepositoryImpl from "../infrastructures/databases/BikeRepositoryImpl";
 import BikeForm from "./forms/BikeForm";
+import BikeValidator from "./forms/validators/BikeValidator";
 
 export default class BikeController {
   private bikeRepository: IBikeRepository = BikeRepositoryImpl.create();
@@ -28,6 +29,11 @@ export default class BikeController {
     });
   }
 
+  /**
+   * 車体一覧画面を表示する
+   * @param req 
+   * @param res 
+   */
   public async getBikeList(req: Request, res: Response) {
     res.render('layout', {
       layout_name: 'bikeList',
@@ -60,7 +66,10 @@ export default class BikeController {
    */
   public async postRegister(req: Request, res: Response) {
     const form: BikeForm = req.body;
-    // 車体登録処理
+    if (BikeValidator.create(form).isInvalid()) {
+      res.redirect('/bike');
+      return;
+    }
     await this.bikeRepository.create(form);
     res.redirect('/bike');
   }

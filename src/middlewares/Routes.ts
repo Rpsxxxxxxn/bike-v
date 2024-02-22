@@ -43,7 +43,6 @@ router.get('/bike/register', async (req: Request, res: Response) => bikeControll
 router.post('/bike/register', async (req: Request, res: Response) => bikeController.postRegister(req, res));
 
 router.get('/bike/have', async (req: Request, res: Response) => haveBikeController.getHaveBike(req, res));
-router.get('/bike/have/register/:id', async (req: Request, res: Response) => haveBikeController.getHaveBikeRegister(req, res));
 router.post('/bike/have/register/:id', async (req: Request, res: Response) => haveBikeController.postHaveBikeRegister(req, res));
 
 router.get('/graph', async (req: Request, res: Response) => historyGraphController.index(req, res));

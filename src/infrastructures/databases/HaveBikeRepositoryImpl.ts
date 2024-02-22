@@ -48,25 +48,19 @@ export default class HaveBikeRepositoryImpl implements IHaveBikeRepository {
     return dataList;
   }
   
-  public async getById(id: number): Promise<HaveBikeEntity> {
-    throw new Error("Method not implemented.");
-  }
-  
-  public async getByUserId(userId: number): Promise<HaveBikeEntity[]> {
-    throw new Error("Method not implemented.");
-  }
-  
   public async create(userId: number, bikeId: number, purchaseDate: Date): Promise<void> {
     const db = SQLiteHelper.create();
-    await db.execute('INSERT INTO have_bike (user_id, bike_id, purchase_date) VALUES (?, ?, ?)', [userId, bikeId, purchaseDate]);
+    await db.execute(`
+    INSERT INTO have_bike (user_id, bike_id, purchase_date)
+    VALUES (?, ?, ?)`, [userId, bikeId, purchaseDate]);
     db.close();
   }
-
-  public async update(form: BikeForm): Promise<void> {
-    throw new Error("Method not implemented.");
-  }
   
-  public async delete(id: number): Promise<void> {
-    throw new Error("Method not implemented.");
+  public async delete(userId: number, bikeId: number): Promise<void> {
+    const db = SQLiteHelper.create();
+    await db.execute(`
+    DELETE FROM have_bike
+    WHERE user_id = ? AND bike_id = ?`, [userId, bikeId]);
+    db.close();
   }
 }

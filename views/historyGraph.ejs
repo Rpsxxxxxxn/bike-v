@@ -1,6 +1,7 @@
 <div class="mx-auto" style="max-width: 700px">
   <canvas id="myChartOdo"></canvas>
   <canvas id="myChartPrice"></canvas>
+  <canvas id="myChartMileage"></canvas>
 </div>
 
 <script>
@@ -19,8 +20,8 @@
         .then((data) => {
           myChartOdo(data);
           myChartPrice(data);
+          myChartMileage(data);
         });
-  // const dataList = await getApi('/api/graph');
 
   function myChartOdo(dataList) {
     let labels = [];
@@ -73,6 +74,39 @@
             data: priceData,
             borderColor: "rgba(255, 99, 132, 1)",
             backgroundColor: "rgba(255, 99, 132, 0.5)",
+            fill: true,
+            tension: 0.1,
+          },
+        ]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    })
+  }
+
+  function myChartMileage(dataList) {
+    let labels = [];
+    let priceData = [];
+    dataList.forEach((data) => {
+      labels.push(data.date);
+      priceData.push(Math.random() * 10.0 + 10);
+    });
+    const ctxPrice = document.getElementById("myChartMileage");
+    const myLineChartPrice = new Chart(ctxPrice, {
+      type: 'bar',
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            label: '燃費',
+            data: priceData,
+            borderColor: "rgba(132, 255, 132, 1)",
+            backgroundColor: "rgba(132, 255, 132, 0.5)",
             fill: true,
             tension: 0.1,
           },

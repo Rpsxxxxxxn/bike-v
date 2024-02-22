@@ -11,6 +11,10 @@ export default class UserController {
   private userRepository: IUserRepository = UserRepositoryImpl.create();
   private constructor() {}
 
+  static create() {
+    return new UserController();
+  }
+
   /**
    * ユーザー登録
    * @param req 
@@ -89,9 +93,5 @@ export default class UserController {
   public async logout(req: Request, res: Response) {
     (req.session as any).user = null;
     res.redirect('/user/login');
-  }
-
-  static create() {
-    return new UserController();
   }
 }

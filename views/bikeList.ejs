@@ -1,26 +1,27 @@
 <a href="/bike/register">車体の追加</a>
 <div class="mx-auto my-5 px-3" style="max-width: 700px">
   <% bikeList.forEach((data)=> { %>
-    <form action="/bike/have/register/<%= data.id %>"></form>
-    <div class="card mb-3">
-      <div class="card-body">
-        <h5 class="card-title">
-          <%= data.company %>
-            <%= data.name %>
-        </h5>
+    <form action="/bike/have/register/<%= data.id %>" method="POST">
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= data.company %>
+              <%= data.name %>
+          </h5>
 
-        <ul class="list-group list-group-flush">
-          <li class="list-group-item">オイル交換時 <%= data.oilChange %>L</li>
-          <li class="list-group-item">フィルタ交換時 <%= data.oilFilter %>L</li>
-          <li class="list-group-item">モデル <%= data.model %>
-          </li>
-          <li class="list-group-item">排気量 <%= data.cc %>cc</li>
-          <li class="list-group-item">納車日 <input name="input-date" type="date" class="form-control"/></li>
-        </ul>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">オイル交換時 <%= data.oilChange %>L</li>
+            <li class="list-group-item">フィルタ交換時 <%= data.oilFilter %>L</li>
+            <li class="list-group-item">モデル <%= data.model %>
+            </li>
+            <li class="list-group-item">排気量 <%= data.cc %>cc</li>
+            <li class="list-group-item">納車日 <input name="date" type="date" class="form-control"/></li>
+          </ul>
+        </div>
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary">保有している車体に追加</button>
+        </div>
       </div>
-      <div class="card-footer">
-        <button type="submit" class="btn btn-primary">保有している車体に追加</button>
-      </div>
-    </div>
+    </form>
   <% }) %>
 </div>
