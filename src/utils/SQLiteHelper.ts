@@ -1,9 +1,7 @@
 import sqlite3 from "sqlite3";
-import fs from "fs";
 
 export default class SQLiteHelper {
   private db: sqlite3.Database;
-  // private INIT_SQL: string = fs.readFileSync('init_db.sql', 'utf8');
   private FILE_NAME: string = './bike-v.db';
 
   private constructor() {
@@ -11,7 +9,6 @@ export default class SQLiteHelper {
   }
 
   public async createTable() {
-    // await this.execute(this.INIT_SQL, []);
     this.db.serialize(() => {
       // ユーザーテーブルの作成
       this.db.run(`DROP TABLE IF EXISTS user;`);
