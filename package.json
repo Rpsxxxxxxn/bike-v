@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon",
-    "start": "ts-node src/index.ts",
+    "dev": "nodemon ENV=dev",
+    "start": "ts-node src/index.ts ENV=prod",
     "build": "tsc",
     "test": "jest --coverage"
   },

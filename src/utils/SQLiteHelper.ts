@@ -5,7 +5,7 @@ export default class SQLiteHelper {
   private FILE_NAME: string = './bike-v.db';
 
   private constructor() {
-    this.db = new sqlite3.Database(this.FILE_NAME);
+    this.db = new sqlite3.Database(process.env.ENV === 'prod' ? this.FILE_NAME : ':memory:');
   }
 
   public async createTable() {
