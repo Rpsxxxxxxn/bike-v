@@ -1,14 +1,18 @@
 import sqlite3 from "sqlite3";
+import EnvironmentUtil from "./EnvironmentUtil";
 
 export default class SQLiteHelper {
   private db: sqlite3.Database;
   private FILE_NAME: string = './bike-v.db';
 
   private constructor() {
-    this.db = new sqlite3.Database(process.env.ENV === 'prod' ? this.FILE_NAME : ':memory:');
+    this.db = new sqlite3.Database(EnvironmentUtil.isTest() ? ':memory:' : this.FILE_NAME);
   }
 
   public async createTable() {
+    if (EnvironmentUtil.isProduction()) {
+      return
+    }
     this.db.serialize(() => {
       // ユーザーテーブルの作成
       this.db.run(`DROP TABLE IF EXISTS user;`);
@@ -31,17 +35,19 @@ export default class SQLiteHelper {
           model TEXT,
           oil_change TEXT,
           oil_filter TEXT,
-          cc INTEGER
+          cc INTEGER,
+          body_link TEXT
         );
       `);
-      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc) VALUES ('Kawasaki', 'Ninja ZX-10R', '8BL-ZXT02L', '2.9', '3.4', 998);`);
-      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc) VALUES ('Ducati', 'Panigale V4 R', '', '3.4', '3.4', 998);`);
-      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc) VALUES ('Honda', 'CBR 1000RR-R', '8BL-SC82', '2.8', '3.0', 999);`);
-      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc) VALUES ('YAMAHA', 'R1', '8BL-RN65J', '3.9', '4.1', 998);`);
-      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc) VALUES ('YAMAHA', 'R1M', '8BL-RN65J', '3.9', '4.1', 998);`);
-      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc) VALUES ('SUZUKI', 'GSX-R1000R', '2BL-DM11G', '3.1', '3.3', 998);`);
-      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc) VALUES ('BMW', 'S1000RR', '', '4.0', '4.0', 999);`);
-      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc) VALUES ('BMW', 'M1000RR', '', '4.0', '4.0', 999);`);
+      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc, body_link) VALUES ('Kawasaki', 'Ninja ZX-10R', '8BL-ZXT02L', '2.9', '3.4', 998, 'https://www.kawasaki-motors.com/ja-jp/motorcycle/ninja/supersport/ninja-zx-10r');`);
+      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc, body_link) VALUES ('Ducati', 'Panigale V4 R', '', '3.4', '3.4', 998, 'https://www.ducati.com/jp/ja/bikes/panigale/panigale-v4-r');`);
+      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc, body_link) VALUES ('Honda', 'CBR 1000RR-R', '8BL-SC82', '2.8', '3.0', 999, 'https://www.honda.co.jp/CBR1000RRR/');`);
+      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc, body_link) VALUES ('YAMAHA', 'R1', '8BL-RN65J', '3.9', '4.1', 998, 'https://www.yamaha-motor.co.jp/mc/lineup/yzf-r1/');`);
+      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc, body_link) VALUES ('YAMAHA', 'R1M', '8BL-RN65J', '3.9', '4.1', 998, 'https://www.yamaha-motor.co.jp/mc/lineup/yzf-r1/');`);
+      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc, body_link) VALUES ('SUZUKI', 'GSX-R1000R', '2BL-DM11G', '3.1', '3.3', 998, 'https://www1.suzuki.co.jp/motor/lineup/gsxr1000ram2/');`);
+      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc, body_link) VALUES ('SUZUKI', 'GSX-1300R Hayabusa', '8BL-EJ11A', '3.2', '3.4', 1339, 'https://www1.suzuki.co.jp/motor/lineup/gsx1300rrqm4/');`);
+      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc, body_link) VALUES ('BMW', 'S1000RR', '', '4.0', '4.0', 999, 'https://www.bmw-motorrad.jp/ja/models/sport/s1000rr.html');`);
+      this.db.run(`INSERT INTO bike (company, name, model, oil_change, oil_filter, cc, body_link) VALUES ('BMW', 'M1000RR', '', '4.0', '4.0', 999, 'https://www.bmw-motorrad.jp/ja/models/m/m1000rr.html');`);
 
       this.db.run(`DROP TABLE IF EXISTS have_bike;`);
       this.db.run(`

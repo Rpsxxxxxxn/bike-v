@@ -9,7 +9,8 @@ describe('BikeValidator', () => {
       company: '',
       oilChange: '',
       oilFilter: '',
-      cc: ''
+      cc: '',
+      bodyLink: '',
     }
     const validator = BikeValidator.create(form);
     expect(validator).toBeInstanceOf(BikeValidator);
@@ -22,7 +23,8 @@ describe('BikeValidator', () => {
       company: '試験用会社',
       oilChange: '1.2',
       oilFilter: '1.0',
-      cc: '999'
+      cc: '999',
+      bodyLink: '',
     }
     const validator = BikeValidator.create(form);
     expect(validator.isValid()).toBeTruthy();
@@ -35,7 +37,8 @@ describe('BikeValidator', () => {
       company: '',
       oilChange: '',
       oilFilter: '',
-      cc: ''
+      cc: '',
+      bodyLink: '',
     }
     const validator = BikeValidator.create(form);
     expect(validator.isInvalid()).toBeTruthy();

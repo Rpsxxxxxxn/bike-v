@@ -27,6 +27,5 @@ app.set('view engine', 'ejs');
 
 app.listen(port, () => {
   console.log(`Example app listening at http://localhost:${port}`);
-  const db = SQLiteHelper.create();
-  db.createTable();
+  SQLiteHelper.create().createTable();
 });

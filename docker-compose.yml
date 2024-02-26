@@ -1,0 +1,12 @@
+version: '3.8'
+services:
+  web:
+    image: "node:alpine"
+    ports:
+      - "8888:5000"
+    volumes:
+      - .:/src
+    environment:
+      ENV: dev
+  redis:
+    image: "redis:alpine"

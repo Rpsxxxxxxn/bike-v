@@ -22,11 +22,11 @@
       </div>
       <div class="mb-3">
         <label for="description" class="form-label">メンテナンス内容 <span class="badge bg-secondary">任意</span></label>
-        <textarea class="form-control" name="description" rows="3" value="<%= bikeData.description %>"></textarea>
+        <textarea class="form-control" name="description" rows="3" value='<%= bikeData.description %>'></textarea>
       </div>
       <div class="mb-3">
         <label for="odo" class="form-label">走行距離(km) <span class="badge bg-danger">必須</span></label>
-        <input type="number" class="form-control" name="odo" placeholder="0" value="<%= bikeData.odo %>" required>
+        <input type="number" class="form-control" name="odo" placeholder="0" value='<%= bikeData.odo %>' required>
       </div>
       <div class="mb-3">
         <label for="price" class="form-label">メンテナンス費用(円) <span class="badge bg-danger">必須</span></label>
@@ -47,7 +47,7 @@
   const maintenanceDate = document.getElementById('maintenance-date');
   const today = new Date();
   const year = today.getFullYear();
-  const month = today.getMonth();
+  const month = today.getMonth() + 1;
   const day = today.getDate();
   const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
   maintenanceDate.value = formattedDate;

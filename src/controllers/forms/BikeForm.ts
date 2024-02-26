@@ -11,4 +11,6 @@ export default interface BikeForm {
   model: string;
   // 排気量
   cc: string;
+  // 車体リンク
+  bodyLink: string;
 }

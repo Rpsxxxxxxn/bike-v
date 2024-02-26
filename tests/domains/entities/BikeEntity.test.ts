@@ -1,7 +1,7 @@
 import BikeEntity from "../../../src/domains/entities/BikeEntity";
 
 describe('BikeEntity', () => {
-  let entity: BikeEntity = BikeEntity.create('1', 'company', 'name', 'model', 'oil_change', 'oil_filter', 'cc');
+  let entity: BikeEntity = BikeEntity.create('1', 'company', 'name', 'model', 'oil_change', 'oil_filter', 'cc', 'body_link');
 
   it('create', () => {
     expect(entity).toBeInstanceOf(BikeEntity);

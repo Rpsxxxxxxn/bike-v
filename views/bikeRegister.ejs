@@ -1,22 +1,39 @@
 <div>
   <div class="card mx-auto my-5" style="max-width: 700px;">
     <div class="px-3 py-3">
-      <div class="mb-3">
-        <label for="name" class="form-label">名前 <span class="badge bg-danger">必須</span></label>
-        <input type="text" class="form-control" name="name" required></input>
-      </div>
-      <div class="mb-3">
-        <label for="type" class="form-label">タイプ <span class="badge bg-danger">必須</span></label>
-        <input type="text" class="form-control" name="type" required></input>
-      </div>
-      <div class="mb-3">
-        <label for="color" class="form-label">色 <span class="badge bg-danger">必須</span></label>
-        <input type="text" class="form-control" name="color" required></input>
-      </div>
-      <div class="mb-3">
-        <label for="price" class="form-label">価格 <span class="badge bg-danger">必須</span></label>
-        <input type="text" class="form-control" name="price" required></input>
-      </div>
+      <form method="POST" action="/bike/register">
+        <div class="mb-3">
+          <label for="company" class="form-label">メーカー <span class="badge bg-danger">必須</span></label>
+          <input type="text" class="form-control" name="company" required></input>
+        </div>
+        <div class="mb-3">
+          <label for="name" class="form-label">車体名 <span class="badge bg-danger">必須</span></label>
+          <input type="text" class="form-control" name="name" required></input>
+        </div>
+        <div class="mb-3">
+          <label for="model" class="form-label">モデル <span class="badge bg-danger">必須</span></label>
+          <input type="text" class="form-control" name="model" required></input>
+        </div>
+        <div class="mb-3">
+          <label for="cc" class="form-label">排気量 <span class="badge bg-danger">必須</span></label>
+          <input type="text" class="form-control" name="cc" required></input>
+        </div>
+        <div class="mb-3">
+          <label for="oilChange" class="form-label">オイル交換 <span class="badge bg-danger">必須</span></label>
+          <input type="text" class="form-control" name="oilChange" required></input>
+        </div>
+        <div class="mb-3">
+          <label for="oilFilter" class="form-label">オイルフィルター <span class="badge bg-danger">必須</span></label>
+          <input type="text" class="form-control" name="oilFilter" required></input>
+        </div>
+        <div class="mb-3">
+          <label for="cc" class="form-label">車体公式サイト <span class="badge bg-secondary">任意</span></label>
+          <input type="text" class="form-control" name="bodyLink" required></input>
+        </div>
+        <div class="d-grid gap-2 col-6 mx-auto">
+          <button type="submit" class="btn btn-primary">車体登録</button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

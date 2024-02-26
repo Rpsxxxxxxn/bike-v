@@ -19,7 +19,8 @@ export default class HaveBikeRepositoryImpl implements IHaveBikeRepository {
         data.model,
         data.oil_change,
         data.oil_filter,
-        data.cc
+        data.cc,
+        data.body_link
       );
     });
     return dataList;
@@ -28,7 +29,7 @@ export default class HaveBikeRepositoryImpl implements IHaveBikeRepository {
   public async getAllByUserId(id: number): Promise<HaveBikeEntity[]> {
     const db = SQLiteHelper.create();
     const dataList: any = await db.all(`
-      SELECT bike.company, bike.name, bike.model, bike.oil_change, bike.oil_filter, bike.cc
+      SELECT bike.company, bike.name, bike.model, bike.oil_change, bike.oil_filter, bike.cc, bike.body_link
       FROM have_bike
       LEFT JOIN user ON user.id = have_bike.user_id
       LEFT JOIN bike ON bike.id = have_bike.bike_id
@@ -41,7 +42,8 @@ export default class HaveBikeRepositoryImpl implements IHaveBikeRepository {
         data.model,
         data.oil_change,
         data.oil_filter,
-        data.cc
+        data.cc,
+        data.body_link
       );
     });
 
