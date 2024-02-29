@@ -25,7 +25,7 @@ export default class HistoryController {
       page_id: HistoryController.PAGE_ID,
       title: HistoryController.TITLE,
       params: {
-        dataList: await this.historyRepository.getAll()
+        dataList: await this.historyRepository.getByBikeId((req.session as any).user.id)
       }
     });
   }

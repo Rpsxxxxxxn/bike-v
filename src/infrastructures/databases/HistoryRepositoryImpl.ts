@@ -22,6 +22,29 @@ export default class HistoryRepositoryImpl implements IHistoryRepository {
     return dataList;
   }
 
+  public async getByUserId(userId: number): Promise<HistoryEntity[]> {
+    const database = SQLiteHelper.create();
+    const dataList: any = await database.all(`
+    SELECT m.id, m.title, m.description, m.odo, m.price, m.date, bike.name AS bike_name
+    FROM maintenance AS m
+    LEFT JOIN user ON user.id = m.user_id
+    LEFT JOIN bike ON bike.id = m.bike_id
+    WHERE m.user_id = ?`, [userId]);
+    dataList.map((data: any) => {
+      return HistoryEntity.create(
+        data.id,
+        data.bike_name,
+        data.title,
+        data.description,
+        data.odo,
+        data.price,
+        data.date
+      );
+    });
+    database.close();
+    return dataList;
+  }
+
   public async getAll(): Promise<HistoryEntity[]> {
     const database = SQLiteHelper.create();
     const dataList: any = await database.all(`

@@ -6,6 +6,7 @@ export default class HaveBikeEntity {
   private oilFilter: string;
   private cc: number;
   private bodyLink: string;
+  private purchaseDate: Date;
 
   private constructor(
     company: string,
@@ -14,7 +15,8 @@ export default class HaveBikeEntity {
     oilChange: string,
     oilFilter: string,
     cc: number,
-    bodyLink: string
+    bodyLink: string,
+    purchaseDate: Date
   ) {
     this.company = company;
     this.name = name;
@@ -23,6 +25,7 @@ export default class HaveBikeEntity {
     this.oilFilter = oilFilter;
     this.cc = cc;
     this.bodyLink = bodyLink;
+    this.purchaseDate = purchaseDate;
   }
 
   static create(
@@ -32,36 +35,41 @@ export default class HaveBikeEntity {
     oilChange: string,
     oilFilter: string,
     cc: number,
-    bodyLink: string
+    bodyLink: string,
+    purchaseDate: Date
   ) {
-    return new HaveBikeEntity(company, name, model, oilChange, oilFilter, cc, bodyLink);
+    return new HaveBikeEntity(company, name, model, oilChange, oilFilter, cc, bodyLink, purchaseDate);
   }
 
-  public getCompany(): string {
+  public getCompany() {
     return this.company;
   }
 
-  public getName(): string {
+  public getName() {
     return this.name;
   }
 
-  public getModel(): string {
+  public getModel() {
     return this.model;
   }
 
-  public getOilChange(): string {
+  public getOilChange() {
     return this.oilChange;
   }
 
-  public getOilFilter(): string {
+  public getOilFilter() {
     return this.oilFilter;
   }
 
-  public getCc(): number {
+  public getCc() {
     return this.cc;
   }
 
-  public getBodyLink(): string {
+  public getBodyLink() {
     return this.bodyLink;
+  }
+
+  public getPurchaseDate() {
+    return this.purchaseDate;
   }
 }

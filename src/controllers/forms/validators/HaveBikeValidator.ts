@@ -13,7 +13,7 @@ export default class HaveBikeValidator implements IValidator {
   }
 
   public isValid(): boolean {
-    return SingleValidator.isDate(this.form.date);
+    return SingleValidator.isDate(new Date(this.form.date));
   }
 
   public isInvalid(): boolean {

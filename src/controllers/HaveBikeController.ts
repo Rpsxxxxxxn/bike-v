@@ -55,6 +55,7 @@ export default class HaveBikeController {
   public async postHaveBikeRegister(req: Request, res: Response) {
     const form: HaveBikeForm = req.body;
     if (HaveBikeValidator.create(form).isInvalid()) {
+      console.log('invalid')
       res.redirect('/bike/have');
       return;
     }

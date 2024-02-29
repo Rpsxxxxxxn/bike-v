@@ -60,7 +60,7 @@ export default class UserController {
     res.render('layout', {
       layout_name: 'login',
       page_id: UserController.PAGE_ID,
-      title: UserController.TITLE + 'ログイン',
+      title: UserController.TITLE + '認証',
       params: {}
     });
   }
@@ -73,15 +73,38 @@ export default class UserController {
   public async postLogin(req: Request, res: Response) {
     const form: UserForm = req.body;
     if (UserValidator.create(form).isInvalid()) {
-      res.redirect('/user/login');
+      res.render('layout', {
+        layout_name: 'login',
+        page_id: UserController.PAGE_ID,
+        title: UserController.TITLE + '認証',
+        params: {
+          error: '入力内容に誤りがあります'
+        }
+      });
+      return;
     }
     const user = await this.userRepository.getByEmail(form.email);
     if (!user) {
-      res.redirect('/user/login');
+      res.render('layout', {
+        layout_name: 'login',
+        page_id: UserController.PAGE_ID,
+        title: UserController.TITLE + '認証',
+        params: {
+          error: 'ユーザーが見つかりません'
+        }
+      });
     } else {
-      const result = bcrypt.compare(form.password, user.getPassword());
+      const result = await bcrypt.compare(form.password, user.getPassword());
       if (!result) {
-        res.redirect('/user/login');
+        res.render('layout', {
+          layout_name: 'login',
+          page_id: UserController.PAGE_ID,
+          title: UserController.TITLE + '認証',
+          params: {
+            error: 'パスワードが一致しません'
+          }
+        });
+        return;
       }
       (req.session as any).user = user;
       res.redirect('/maintenance');

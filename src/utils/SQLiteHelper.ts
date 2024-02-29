@@ -55,12 +55,12 @@ export default class SQLiteHelper {
           id INTEGER PRIMARY KEY,
           user_id INTEGER,
           bike_id INTEGER,
-          purchase_date TEXT,
+          purchase_date DATETIME,
           FOREIGN KEY (user_id) REFERENCES user(id)
           FOREIGN KEY (bike_id) REFERENCES bike(id)
         );
       `);
-      this.db.run(`INSERT INTO have_bike (user_id, bike_id) VALUES (1, 1);`);
+      this.db.run(`INSERT INTO have_bike (user_id, bike_id, purchase_date) VALUES (1, 1, '2023-07-16');`);
   
       // maintenance テーブルの作成または削除
       this.db.run(`DROP TABLE IF EXISTS maintenance;`);
@@ -80,7 +80,8 @@ export default class SQLiteHelper {
       `);
   
       // maintenance テーブルにデータを挿入
-      this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'オイル交換', '冴強にオイル交換', 1000, 0, '2023-07-24');`);
+      this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'オイル交換', '冴強にオイル交換', 1200, 12000, '2023-07-20');`);
+      this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'オイル交換', '冴強にオイル交換', 1400, 0, '2023-07-24');`);
       this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'オイル交換', '冴強にオイル交換', 4000, 7000, '2023-08-14');`);
       this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'オイル交換', '冴速にオイル交換', 7000, 7000, '2023-09-14');`);
       this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'オイル交換', '冴速にオイル交換', 9000, 7000, '2023-10-24');`);
@@ -88,6 +89,8 @@ export default class SQLiteHelper {
       this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'オイル交換', '冴速にオイル交換', 13000, 7000, '2023-12-3');`);
       this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'タイヤ変更', 'RS11に前後タイヤ交換。', 15000, 70000, '2024-01-14');`);
       this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'オイル交換', '冴速にオイル交換', 15000, 7000, '2024-01-14');`);
+      this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'オイル交換', '冴速にオイル交換', 17500, 7000, '2024-02-23');`);
+      this.db.run(`INSERT INTO maintenance (user_id, bike_id, title, description, odo, price, date) VALUES (1, 1, 'オイルフィルター交換', 'Kawasaki純正オイルに交換', 17500, 7000, '2024-02-23');`);
     });
   }
 
