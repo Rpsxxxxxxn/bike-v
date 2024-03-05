@@ -1,5 +1,6 @@
 import HaveBikeEntity from "../../domains/entities/HaveBikeEntity";
 import IHaveBikeRepository from "../../domains/repositories/IHaveBikeRepository";
+import PurchaseDate from "../../domains/valueObjects/PurchaseDate";
 import SQLiteHelper from "../../utils/SQLiteHelper";
 
 export default class HaveBikeRepositoryImpl implements IHaveBikeRepository {
@@ -27,7 +28,7 @@ export default class HaveBikeRepositoryImpl implements IHaveBikeRepository {
         data.oil_filter,
         data.cc,
         data.body_link,
-        new Date(data.purchase_date),
+        PurchaseDate.create(data.purchase_date),
       );
     });
 

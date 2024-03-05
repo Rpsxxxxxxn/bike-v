@@ -7,6 +7,7 @@ import BikeController from '../controllers/BikeController';
 import HistoryGraphController from '../controllers/HistoryGraphController';
 import View3DController from '../controllers/View3DController';
 import HaveBikeController from '../controllers/HaveBikeController';
+import RealtimeRiderInfoController from '../controllers/RealtimeRiderInfoController';
 
 const historyController = HistoryController.create();
 const maintenanceController = MaintenanceController.create();
@@ -15,6 +16,7 @@ const bikeController = BikeController.create();
 const haveBikeController = HaveBikeController.create();
 const historyGraphController = HistoryGraphController.create();
 const view3DController = View3DController.create();
+const realtimeRiderInfoController = RealtimeRiderInfoController.create();
 
 const router = Router();
 router.use(Authenticate.authenticateUser);
@@ -28,6 +30,9 @@ router.post('/user/login', async (req: Request, res: Response) => userController
 router.get('/user/register', async (req: Request, res: Response) => userController.getRegister(req, res));
 router.post('/user/register', async (req: Request, res: Response) => userController.postRegister(req, res));
 router.post('/user/logout', async (req: Request, res: Response) => userController.logout(req, res));
+
+router.get('/rider/realtime', async (req: Request, res: Response) => realtimeRiderInfoController.get(req, res));
+router.post('/rider/realtime', async (req: Request, res: Response) => realtimeRiderInfoController.post(req, res));
 
 router.get('/history', async (req: Request, res: Response) => historyController.get(req, res));
 router.get('/history/update/:id', async (req: Request, res: Response) => historyController.getUpdate(req, res));

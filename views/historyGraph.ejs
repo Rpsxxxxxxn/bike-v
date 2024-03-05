@@ -1,10 +1,31 @@
 <div class="mx-auto" style="max-width: 700px">
   <canvas id="myChartOdo"></canvas>
-  <canvas id="myChartPrice"></canvas>
-  <canvas id="myChartMileage"></canvas>
+  <table class="table table-striped-columns table-bordered ">
+    <thead>
+      <tr>
+        <th scope="row">#</th>
+        <td>走行距離</td>
+        <td>メンテナンス費用</td>
+        <td>登録日付</td>
+      </tr>
+    </thead>
+    <tbody>
+      <% dataList.forEach((data, index) => { %>
+        <tr>
+          <th scope="row"><%= index + 1 %></th>
+          <td><%= String(data.odo).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') %></td>
+          <td><%= String(data.price).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') %></td>
+          <td><%= data.date %></td>
+        </tr>
+        <% }) %>
+      </tbody>
+    </table>
+    <canvas id="myChartPrice"></canvas>
+    <canvas id="myChartMileage"></canvas>
 </div>
 
 <script>
+
   function getApi(url) {
     return new Promise((resolve, reject) => {
       fetch(url)
@@ -18,95 +39,38 @@
   fetch('/api/graph')
         .then((res) => res.json())
         .then((data) => {
-          myChartOdo(data);
-          myChartPrice(data);
-          // myChartMileage(data);
+          ConvertChartByData(data);
         });
 
-  function myChartOdo(dataList) {
+  function ConvertChartByData(dataList) {
     let labels = [];
     let odoData = [];
+    let priceData = [];
     dataList.forEach((data) => {
       labels.push(data.date);
       odoData.push(data.odo);
+      priceData.push(data.price);
     });
     const ctx = document.getElementById("myChartOdo");
     const myLineChart = new Chart(ctx, {
-      type: 'line',
       data: {
         labels: labels,
         datasets: [
           {
+            type: 'line',
             label: '走行距離',
             data: odoData,
-            borderColor: "rgba(32, 99, 232, 1)",
-            backgroundColor: "rgba(32, 99, 232, 0.5)",
+            borderColor: "rgba(32, 99, 232, 0.8)",
+            backgroundColor: "rgba(32, 99, 232, 0.2)",
             fill: true,
             tension: 0
           },
-        ]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    })
-  }
-
-  function myChartPrice(dataList) {
-    let labels = [];
-    let priceData = [];
-    dataList.forEach((data) => {
-      labels.push(data.date);
-      priceData.push(data.price);
-    });
-    const ctxPrice = document.getElementById("myChartPrice");
-    const myLineChartPrice = new Chart(ctxPrice, {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [
           {
+            type: 'bar',
             label: 'メンテナンス費用',
             data: priceData,
-            borderColor: "rgba(255, 99, 132, 1)",
-            backgroundColor: "rgba(255, 99, 132, 0.5)",
-            fill: true,
-            tension: 0.1,
-          },
-        ]
-      },
-      options: {
-        scales: {
-          y: {
-            beginAtZero: true
-          }
-        }
-      }
-    })
-  }
-
-  function myChartMileage(dataList) {
-    let labels = [];
-    let priceData = [];
-    dataList.forEach((data) => {
-      labels.push(data.date);
-      priceData.push(Math.random() * 10.0 + 10);
-    });
-    const ctxPrice = document.getElementById("myChartMileage");
-    const myLineChartPrice = new Chart(ctxPrice, {
-      type: 'bar',
-      data: {
-        labels: labels,
-        datasets: [
-          {
-            label: '燃費',
-            data: priceData,
-            borderColor: "rgba(132, 255, 132, 1)",
-            backgroundColor: "rgba(132, 255, 132, 0.5)",
+            borderColor: "rgba(255, 99, 132, 0.8)",
+            backgroundColor: "rgba(255, 99, 132, 0.2)",
             fill: true,
             tension: 0.1,
           },

@@ -3,22 +3,29 @@
     <div class="card border-primary mb-3">
       <div class="row g-0">
         <div class="card-header">
-          <%= data.bike_name %> <%= data.title %>
+          <b><%= data.bike_name %> <%= data.title %></b>
         </div>
         <div class="col-md-8">
           <div class="card-body">
             <p class="card-text">
               <%= data.description %>
             </p>
-            <p class="card-text">走行距離 <%= data.odo %></p>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"><b>走行距離(km)</b> <%= String(data.odo).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,')%></li>
+              <li class="list-group-item"><b>金額(¥)</b> <%= String(data.price).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') %></li>
+              <li class="list-group-item"><b>メンテナンス日付</b> <small class="text-body-secondary"><%= data.date %></small></li>
+            </ul>
+            <!-- <p class="card-text">走行距離 <%= data.odo %></p>
             <p class="card-text">金額 <%= data.price %></p>
-            <p class="card-text"><small class="text-body-secondary"><%= data.date %></small></p>
+            <p class="card-text"><small class="text-body-secondary"><%= data.date %></small></p> -->
           </div>
 
         </div>
         <div class="card-footer text-body-secondary">
-          <a href="/history/update/<%= data.id %>" class="btn btn-primary">編集</a>
-          <a href="/history/delete/<%= data.id %>" class="btn btn-danger">削除</a>
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="/history/update/<%= data.id %>" class="btn btn-primary">編集</a>
+            <a href="/history/delete/<%= data.id %>" class="btn btn-danger">削除</a>
+          </div>
         </div>
       </div>
     </div>

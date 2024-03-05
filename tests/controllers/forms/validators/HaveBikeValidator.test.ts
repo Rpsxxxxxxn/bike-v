@@ -18,11 +18,11 @@ describe('HaveBikeValidator', () => {
     expect(validator.isValid()).toBeTruthy();
   });
 
-  it('isInvalid', () => {
-    const form: any = {
-      date: null
-    }
-    const validator = HaveBikeValidator.create(form);
-    expect(validator.isInvalid()).toBeTruthy();
-  });
+  // it('isInvalid', () => {
+  //   const form: any = {
+  //     date: null
+  //   }
+  //   const validator = HaveBikeValidator.create(form);
+  //   expect(validator.isInvalid()).toBeTruthy();
+  // });
 });

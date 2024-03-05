@@ -1,0 +1,22 @@
+<div>
+  <div>最高速度</div>
+  <div>MAX左リーン角度</div>
+  <div>MAX右リーン角度</div>
+</div>
+
+<script>
+
+  console.log(navigator.geolocation);
+
+  // デバイスの傾きを取得
+  window.addEventListener('deviceorientation', function(event) {
+    // alpha: z軸, beta: x軸, gamma: y軸
+    var alpha = event.alpha;
+    var beta = event.beta;
+    var gamma = event.gamma;
+
+    console.log('alpha: ' + alpha);
+    console.log('beta: ' + beta);
+    console.log('gamma: ' + gamma);
+  });
+</script>

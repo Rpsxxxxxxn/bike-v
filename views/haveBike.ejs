@@ -9,12 +9,12 @@
         </h5>
 
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">オイル交換時 <%= data.oil_change %>L</li>
-          <li class="list-group-item">フィルタ交換時 <%= data.oil_filter %>L</li>
-          <li class="list-group-item">モデル <%= data.model %>
+          <li class="list-group-item"><b>オイル交換時</b> <%= data.oil_change %>L</li>
+          <li class="list-group-item"><b>フィルタ交換時</b> <%= data.oil_filter %>L</li>
+          <li class="list-group-item"><b>モデル</b> <%= data.model %>
           </li>
-          <li class="list-group-item">排気量 <%= data.cc %>cc</li>
-          <li class="list-group-item">納車日 <%= new Date(data.purchase_date) %></li>
+          <li class="list-group-item"><b>排気量</b> <%= data.cc %>cc</li>
+          <li class="list-group-item"><b>納車日</b> <%= new Date(data.purchase_date).getFullYear() + "年" + (new Date(data.purchase_date).getMonth() + 1) + "月" + new Date(data.purchase_date).getDate() + "日"  %></li>
           <li class="list-group-item"><a href='<%= data.body_link %>' target="_blank" rel="noopener noreferrer">車体公式サイト</a></li>
         </ul>
       </div>
@@ -24,3 +24,10 @@
     </div>
   <% }) %>
 </div>
+
+<script>
+  // XXXX年XX月XX日の形式に変換する
+  function changeDateFormat(date) {
+    return date.getFullYear() + "年" + (date.getMonth() + 1) + "月" + date.getDate() + "日";
+  }
+</script>

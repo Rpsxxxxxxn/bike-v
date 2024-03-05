@@ -1,3 +1,5 @@
+import PurchaseDate from "../valueObjects/PurchaseDate";
+
 export default class HaveBikeEntity {
   private company: string;
   private name: string;
@@ -6,7 +8,7 @@ export default class HaveBikeEntity {
   private oilFilter: string;
   private cc: number;
   private bodyLink: string;
-  private purchaseDate: Date;
+  private purchaseDate: PurchaseDate;
 
   private constructor(
     company: string,
@@ -16,7 +18,7 @@ export default class HaveBikeEntity {
     oilFilter: string,
     cc: number,
     bodyLink: string,
-    purchaseDate: Date
+    purchaseDate: PurchaseDate
   ) {
     this.company = company;
     this.name = name;
@@ -36,7 +38,7 @@ export default class HaveBikeEntity {
     oilFilter: string,
     cc: number,
     bodyLink: string,
-    purchaseDate: Date
+    purchaseDate: PurchaseDate
   ) {
     return new HaveBikeEntity(company, name, model, oilChange, oilFilter, cc, bodyLink, purchaseDate);
   }

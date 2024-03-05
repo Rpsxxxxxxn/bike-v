@@ -1,6 +1,6 @@
 
 <form class=" px-3" action="/user/login" method="POST">
-  <div class="card mx-auto my-5" style="max-width: 700px;">
+  <div class="card mx-auto my-5" style="max-width: 400px;">
     <div class="px-3 py-3">
       <% if (params.error) { %>
       <div class="alert alert-danger" role="alert">
@@ -13,14 +13,15 @@
       </div>
       <div class="mb-3">
         <label for="password" class="form-label">パスワード <span class="badge bg-danger">必須</span></label>
-        <input type="password" class="form-control" name="password" value="" required></input>
+        <input type="password" class="form-control is-invalid" name="password" value="" required></input>
+        <div class="invalid-feedback">
+          パスワードが入力されていません。
+        </div>
       </div>
       <div class="mb-3">
         <a href="/user/register">新規登録はこちら</a>
       </div>
-      <div class="d-grid gap-2 col-6 mx-auto">
-        <button type="submit" class="btn btn-primary">ログイン</button>
-      </div>
+      <button type="submit" class="btn btn-primary w-100">ログイン</button>
     </div>
   </div>
 </form>

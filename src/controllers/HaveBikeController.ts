@@ -63,6 +63,12 @@ export default class HaveBikeController {
     res.redirect('/bike/have');
   }
 
+  /**
+   * 所有車体削除
+   * @param req 
+   * @param res 
+   * @returns 
+   */
   public async postHaveBikeDelete(req: Request, res: Response) {
     const form: HaveBikeForm = req.body;
     if (HaveBikeValidator.create(form).isInvalid()) {

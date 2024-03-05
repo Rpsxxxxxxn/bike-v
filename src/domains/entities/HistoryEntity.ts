@@ -1,3 +1,5 @@
+import PurchaseDate from "../valueObjects/PurchaseDate";
+
 export default class HistoryEntity {
   private id: string;
   private bikeName: string;
@@ -5,7 +7,7 @@ export default class HistoryEntity {
   private description: string;
   private odo: number;
   private price: number;
-  private date: Date;
+  private date: PurchaseDate;
 
   private constructor(
     id: string,
@@ -14,7 +16,7 @@ export default class HistoryEntity {
     description: string,
     odo: number,
     price: number,
-    date: Date
+    date: PurchaseDate
   ) {
     this.id = id;
     this.bikeName = bikeName;
@@ -32,7 +34,7 @@ export default class HistoryEntity {
     description: string,
     odo: number,
     price: number,
-    date: Date
+    date: PurchaseDate
   ) {
     return new HistoryEntity(id, bikeName, title, description, odo, price, date);
   }

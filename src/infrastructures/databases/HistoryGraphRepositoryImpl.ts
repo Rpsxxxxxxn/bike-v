@@ -17,7 +17,7 @@ export default class HistoryGraphRepositoryImpl implements IHistoryGraphReposito
       LEFT JOIN user ON user.id = m.user_id
       LEFT JOIN bike ON bike.id = m.bike_id
       WHERE user.id = ?
-      ORDER BY m.date DESC`, [userId]);
+      ORDER BY m.date ASC LIMIT 10`, [userId]);
     const result: HistoryEntity[] = dataList.map((data: any) => {
       return HistoryEntity.create(
         data.id,
