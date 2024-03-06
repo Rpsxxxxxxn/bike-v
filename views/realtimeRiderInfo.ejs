@@ -1,25 +1,56 @@
-<div>
-  <div>最高速度</div>
+<div class="text-center">
+  <button id="permissionRequest" class="btn btn-primary my-3" onclick="permissionRequest();">デバイスアクセスの許可</button>
   <div>
-    <label>MAX左リーン角度</label>
-    <span>00</span>
+    <h1>現在のGPS速度</h1>
+    <span class="fs-3" id="gps-speed">---</span>
   </div>
-  <div>MAX右リーン角度</div>
+  <div>
+    <h1>最高速度</h1>
+    <span class="fs-3" id="top-speed">299</span>
+  </div>
+  <div>
+    <h2>MAX左リーン角度</h2>
+    <span class="fs-3" id="left-angle">00</span>
+  </div>
+  <div>
+    <h2>MAX右リーン角度</h2>
+    <span class="fs-3" id="right-angle">00</span>
+  </div>
 </div>
 
 <script>
+  function permissionRequest() {
+    if ( DeviceOrientationEvent
+		    && DeviceOrientationEvent.requestPermission
+				&& typeof DeviceOrientationEvent.requestPermission === 'function'
+		) {
+      DeviceOrientationEvent.requestPermission().then( permissionState => {
+        if ( permissionState === 'granted' ) {
+          window.addEventListener( "deviceorientation", function(e) {
+            document.getElementById("left-angle").textContent = Math.round(e.gamma);
+            document.getElementById("right-angle").textContent = Math.round(e.gamma);
+          }, false );
+        } else {
+          console.log('denied');
+        }
+      });
+    }
+  }
+  window.onload = function() {
+    permissionRequest();
+  }
+// if ('DeviceOrientationEvent' in window) {
+//   // 'deviceorientation' イベントリスナーを追加
+//   window.addEventListener('deviceorientation', function(event) {
+//     // アルファ値（デバイスが北を向いている度合い）、ベータ値（前後の傾き）、ガンマ値（左右の傾き）を取得
+//     var alpha = event.alpha;
+//     var beta = event.beta;
+//     var gamma = event.gamma;
 
-  console.log(navigator.geolocation);
-
-  // デバイスの傾きを取得
-  window.addEventListener('deviceorientation', function(event) {
-    // alpha: z軸, beta: x軸, gamma: y軸
-    var alpha = event.alpha;
-    var beta = event.beta;
-    var gamma = event.gamma;
-
-    console.log('alpha: ' + alpha);
-    console.log('beta: ' + beta);
-    console.log('gamma: ' + gamma);
-  });
+//     // 取得した値を使って何かをする
+//     console.log(`Alpha: ${alpha}, Beta: ${beta}, Gamma: ${gamma}`);
+//   }, false);
+// } else {
+//   console.log('このデバイスではデバイスの傾き情報は利用できません。');
+// }
 </script>

@@ -45,6 +45,7 @@ export default class UserController {
           error: '入力内容に誤りがあります'
         }
       });
+      return
     }
     form.password = await bcrypt.hash(form.password, 10);
     await this.userRepository.insert(form);

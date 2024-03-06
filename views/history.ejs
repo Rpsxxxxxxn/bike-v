@@ -1,4 +1,27 @@
-<div class="mx-auto my-5 px-3" style="max-width: 700px;">
+<div class="mx-auto pt-3 px-3" style="max-width: 700px;">
+  <div class="mb-3">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <select class="form-select form-select" aria-label="メーカー">
+        <option selected>メーカー</option>
+        <option value="1">その1</option>
+        <option value="2">その2</option>
+        <option value="3">その3</option>
+      </select>
+      <select class="form-select form-select" aria-label="モデル">
+        <option selected>モデル</option>
+        <option value="1">その1</option>
+        <option value="2">その2</option>
+        <option value="3">その3</option>
+      </select>
+      <select class="form-select form-select" aria-label="メンテナンス内容">
+        <option selected>メンテナンス内容</option>
+        <option value="1">その1</option>
+        <option value="2">その2</option>
+        <option value="3">その3</option>
+      </select>
+    </div>
+  </div>
+  <hr>
   <% dataList.forEach((data) => { %>
     <div class="card border-primary mb-3">
       <div class="row g-0">
@@ -15,9 +38,6 @@
               <li class="list-group-item"><b>金額(¥)</b> <%= String(data.price).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') %></li>
               <li class="list-group-item"><b>メンテナンス日付</b> <small class="text-body-secondary"><%= data.date %></small></li>
             </ul>
-            <!-- <p class="card-text">走行距離 <%= data.odo %></p>
-            <p class="card-text">金額 <%= data.price %></p>
-            <p class="card-text"><small class="text-body-secondary"><%= data.date %></small></p> -->
           </div>
 
         </div>

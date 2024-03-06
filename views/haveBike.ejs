@@ -19,7 +19,10 @@
         </ul>
       </div>
       <div class="card-footer">
-        <a href="/bike/have/delete/<%= data.id %>" class="btn btn-danger">所有している車体の削除</a>
+        <form action="/bike/have/delete/<%= data.id %>" method="POST">
+          <button type="submit" class="btn btn-danger">所有している車体の削除</button>
+        </form>
+        <!-- <a href="/bike/have/delete/<%= data.id %>" class="btn btn-danger">所有している車体の削除</a> -->
       </div>
     </div>
   <% }) %>

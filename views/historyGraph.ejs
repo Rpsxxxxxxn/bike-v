@@ -1,27 +1,57 @@
-<div class="mx-auto" style="max-width: 700px">
+<div class="mx-auto pt-3" style="max-width: 700px">
+  <div class="mb-3">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+      <select class="form-select form-select" aria-label="メーカー">
+        <option selected>メーカー</option>
+        <option value="1">その1</option>
+        <option value="2">その2</option>
+        <option value="3">その3</option>
+      </select>
+      <select class="form-select form-select" aria-label="モデル">
+        <option selected>モデル</option>
+        <option value="1">その1</option>
+        <option value="2">その2</option>
+        <option value="3">その3</option>
+      </select>
+      <select class="form-select form-select" aria-label="メンテナンス内容">
+        <option selected>メンテナンス内容</option>
+        <option value="1">その1</option>
+        <option value="2">その2</option>
+        <option value="3">その3</option>
+      </select>
+    </div>
+  </div>
+  <hr>
   <canvas id="myChartOdo"></canvas>
+  <hr>
   <table class="table table-striped-columns table-bordered ">
     <thead>
       <tr>
-        <th scope="row">#</th>
-        <td>走行距離</td>
-        <td>メンテナンス費用</td>
-        <td>登録日付</td>
+        <td><b>走行距離</b></td>
+        <td><b>メンテナンス費用</b></td>
+        <td><b>登録日付</b></td>
+        <!-- <td><b>操作</b></td> -->
       </tr>
     </thead>
     <tbody>
       <% dataList.forEach((data, index) => { %>
         <tr>
-          <th scope="row"><%= index + 1 %></th>
           <td><%= String(data.odo).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') %></td>
           <td><%= String(data.price).replace( /(\d)(?=(\d\d\d)+(?!\d))/g, '$1,') %></td>
           <td><%= data.date %></td>
+          <!-- <td>
+            <form action="/history/delete/<%= data.id %>" method="POST">
+              <input
+                type="submit"
+                class="btn btn-danger"
+                value="削除"
+                onclick="return confirm('削除しますか？')"
+            ></form>
+          </td> -->
         </tr>
         <% }) %>
       </tbody>
     </table>
-    <canvas id="myChartPrice"></canvas>
-    <canvas id="myChartMileage"></canvas>
 </div>
 
 <script>
